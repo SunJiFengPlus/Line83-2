@@ -21,22 +21,22 @@ public class BowlingTest {
         assertThat(score).isEqualTo(0);
     }
 
-    @DisplayName("10, 后19次倒瓶数都为0, 最终得分:10")
+    @DisplayName("10, 后18次倒瓶数都为0, 最终得分:10")
     @Test
     public void test1() {
         bowling.roll(10);
-        rollN(19, 0);
+        rollN(18, 0);
         int score = bowling.getScore();
 
         assertThat(score).isEqualTo(10);
     }
 
-    @DisplayName("10,3,3 后17次倒瓶数都为0, 最终得分:22")
+    @DisplayName("10,3,3 后16次倒瓶数都为0, 最终得分:22")
     @Test
     public void test3() {
         bowling.roll(10);
         rollN(2, 3);
-        rollN(17, 0);
+        rollN(16, 0);
         int score = bowling.getScore();
 
         assertThat(score).isEqualTo(22);
