@@ -14,44 +14,40 @@ public class Bowling {
 
     // Please don't modify the signature of this method.
     public int getScore() {
-        if(this.score != 0) {
-            this.score = 0;
-        }
-
-        boolean midFrame = false;
-        boolean isStrike = false;
-
-        for(int i = 0; i < this.rollsIndex; i++) {
-            if(this.rolls[i] == 10 || midFrame) {
-                if(isStrike) {
-                    if(midFrame) {
-                            this.score += this.rolls[i] + this.rolls[i - 1];
-                    } else {
-                        if(i != this.rollsIndex - 1) {
-                            this.score += this.rolls[i] + this.rolls[i + 1];
-                        }
-                    }
-                    isStrike = false;
-                }
-
-                if(this.rolls[i] == 10 && !midFrame) {
-                    this.score += this.rolls[i];
-                    isStrike = true;
-                } else {
-                    if((this.rolls[i-1] + this.rolls[i] == 10) && midFrame){
-                        if(i != this.rollsIndex - 1) {
-                            this.score += this.rolls[i + 1];
-                        }
-                    }
-                    this.score += this.rolls[i] + this.rolls[i-1];
-                    if (midFrame) {
-                        midFrame = false;
-                    }
-                }
-            } else {
-                    midFrame = true;
-            }
-        }
-        return this.score;
+        int score = 0;
+		int frameIndex = 0;
+		for(int frame = 0; frame < 10; frame++ ) {
+			if ( isStrike(frameIndex) ) {
+				score += strikeBonus(frameIndex);
+				frameIndex += 1;
+			} else if ( isSpare(frameIndex) ) {
+				score += spareBonus(frameIndex);
+				frameIndex += 2;
+			} else {
+				score += sumOfBallsInFrame(frameIndex);
+				frameIndex += 2;
+			}
+		}
+		return score;
     }
+
+	private int sumOfBallsInFrame(int frameIndex) {
+		return rolls[frameIndex] + rolls[frameIndex+1];
+	}
+
+	private int spareBonus(int frameIndex) {
+		return 10 + rolls[frameIndex+2];
+	}
+
+	private int strikeBonus(int frameIndex) {
+		return 10 + rolls[frameIndex+1] + rolls[frameIndex+2];
+	}
+
+	private boolean isStrike(int frameIndex) {
+		return rolls[frameIndex] == 10;
+	}
+
+	private boolean isSpare(int frameIndex) {
+		return rolls[frameIndex] + rolls[frameIndex+1] == 10;
+	}
 }
