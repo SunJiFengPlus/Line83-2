@@ -16,7 +16,7 @@ public class Bowling {
         int score = 0;
         int frameIndex = 0;
         for (int round = 0, finalRound = 10; round < finalRound; round++) {
-            AbsFrame frame = AbsFrame.of(rolls, frameIndex);
+            AbstractFrame frame = AbstractFrame.of(rolls, frameIndex);
             score += frame.getScore();
             frameIndex += frame.getIndexGap();
         }

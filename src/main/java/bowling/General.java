@@ -4,7 +4,7 @@ package bowling;
  * @author 孙继峰
  * @since 2020/10/28
  */
-public class General extends AbsFrame {
+public class General extends AbstractFrame {
     public General(int[] rolls, int frameIndex) {
         super(rolls, frameIndex);
     }
